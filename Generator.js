@@ -1,50 +1,26 @@
-var unityInstance = null;
 var jsonData = "";
 var callback = null;
-var canvas = null;
+var iframe = null;
 
 function GenerateSchematic(json, generatorCallback) {
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/UnityModule.loader.js";
-    var config = {
-        dataUrl: buildUrl + "/UnityModule.data",
-        frameworkUrl: buildUrl + "/UnityModule.framework.js",
-        codeUrl: buildUrl + "/UnityModule.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "Schematics",
-        productVersion: "1.0",
-    };
+    var gameUrl = "your-game.html";
 
-    canvas = document.createElement('canvas');
-    canvas.id = "unity-canvas";
-    canvas.className = "unity-desktop"
-    canvas.width = 32;
-    canvas.height = 32;
-    document.body.appendChild(canvas);
-
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-        createUnityInstance(canvas, config).then((instance) => {
-            unityInstance = instance;
-
-        }).catch((message) => {
-            alert(message);
-        });
-    };
+    iframe = document.createElement('iframe');
+    iframe.id = "unity-iframe";
+    iframe.width = 32;
+    iframe.height = 32;
+    iframe.src = gameUrl;
+    document.body.appendChild(iframe);
 
     jsonData = json;
     callback = generatorCallback;
-    document.body.appendChild(script);
 }
 
 function OnGeneratorBootListener() {
-    unityInstance.SendMessage("Generator","GenerateFromJson", jsonData)
+    iframe.contentWindow.unityInstance.SendMessage("Generator", "GenerateFromJson", jsonData);
 }
 
 function OnBase64Generated(base64) {
-    var parent = canvas.parentNode;
-    canvas.parentNode.removeChild(canvas);
+    document.body.removeChild(iframe);
     callback(base64);
 }
