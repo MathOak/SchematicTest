@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Exemplo Unity WebGL</title>
-    <style>
-        #gameContainer {
-            width: 960px;
-            height: 600px;
-            margin: auto;
-        }
-    </style>
 </head>
 <body>
-    <div id="gameContainer"></div>
+    <div id="gameContainer">
+        <canvas id="unity-canvas" width=960 height=600></canvas>
+    </div>
 
     <script>
         var gameInstance = null;
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/UnityModule.loader.js";
+
+        var canvas = document.querySelector("#unity-canvas");
+
         var config = {
             dataUrl: buildUrl + "/UnityModule.data.br",
             frameworkUrl: buildUrl + "/UnityModule.framework.js.br",
