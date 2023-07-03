@@ -27,7 +27,7 @@
             productVersion: "1.0"
         };
 
-        var gameInstance = UnityLoader.instantiate("gameContainer", config);
+        var gameInstance = createUnityInstance("gameContainer", config);
 
         // Função que pode ser chamada para encerrar o Unity WebGL
         function stopUnity() {
