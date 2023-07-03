@@ -11,7 +11,7 @@
     <script src="Generator.js"></script>
     <script>
         var canvas = document.querySelector("#unity-canvas");
-        GenerateSchematic(canvas, "{}");
+        GenerateSchematic(canvas, "{}", (callback) => console.log("Bas64 Gerado: " + callback));
     </script>
 </body>
 </html>

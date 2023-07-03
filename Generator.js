@@ -1,4 +1,8 @@
-function GenerateSchematic(canvas, json) {
+var unityInstance = null;
+var jsonData = "";
+var callback = null
+
+function GenerateSchematic(canvas, json, generatorCallback) {
     var buildUrl = "Build";
     var loaderUrl = buildUrl + "/UnityModule.loader.js";
     var config = {
@@ -14,10 +18,23 @@ function GenerateSchematic(canvas, json) {
     var script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-        createUnityInstance(canvas, config).catch((message) => {
+        createUnityInstance(canvas, config).then((instance) => {
+            unityInstance = instance;
+
+        }).catch((message) => {
             alert(message);
         });
     };
 
+    jsonData = json;
+    callback = generatorCallback;
     document.body.appendChild(script);
+}
+
+function OnGeneratorBootListener() {
+    unityInstance.SendMessage("Generator", jsonData)
+}
+
+function OnBase64Generated(base64) {
+    callback(base64);
 }
