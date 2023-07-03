@@ -1,26 +1,14 @@
-var jsonData = "";
-var callback = null;
 var iframe = null;
 
 function GenerateSchematic(json, generatorCallback) {
-    var gameUrl = "Generator.html";
+    var gameUrl = "Module/Generator.html";
 
     iframe = document.createElement('iframe');
     iframe.id = "unity-iframe";
-    iframe.width = 32;
-    iframe.height = 32;
     iframe.src = gameUrl;
+
+    iframe.jsonData = json;
+    iframe.callback = generatorCallback;
+
     document.body.appendChild(iframe);
-
-    jsonData = json;
-    callback = generatorCallback;
-}
-
-function OnGeneratorBootListener() {
-    iframe.contentWindow.unityInstance.SendMessage("Generator", "GenerateFromJson", jsonData);
-}
-
-function OnBase64Generated(base64) {
-    document.body.removeChild(iframe);
-    callback(base64);
 }
