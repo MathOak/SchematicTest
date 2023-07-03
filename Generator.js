@@ -1,6 +1,7 @@
 var unityInstance = null;
 var jsonData = "";
-var callback = null
+var callback = null;
+var canvas = null;
 
 function GenerateSchematic(json, generatorCallback) {
     var buildUrl = "Build";
@@ -15,7 +16,7 @@ function GenerateSchematic(json, generatorCallback) {
         productVersion: "1.0",
     };
 
-    var canvas = document.createElement('canvas');
+    canvas = document.createElement('canvas');
     canvas.id = "unity-canvas";
     canvas.className = "unity-desktop"
     canvas.width = 32;
@@ -43,5 +44,6 @@ function OnGeneratorBootListener() {
 }
 
 function OnBase64Generated(base64) {
+    canvas.parentNode.removeChild(canvas)
     callback(base64);
 }
