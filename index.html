@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo Unity WebGL</title>
+    <style>
+        #gameContainer {
+            width: 960px; 
+            height: 600px; 
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer"></div>
+
+    <script src="Build/UnityModule.loader.js"></script>
+    <script>
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/UnityModule.loader.js";
+        var config = {
+            dataUrl: buildUrl + "/UnityModule.data.br",
+            frameworkUrl: buildUrl + "/UnityModule.framework.js.br",
+            codeUrl: buildUrl + "/UnityModule.wasm.br",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "DefaultCompany",
+            productName: "Schematics",
+            productVersion: "1.0"
+        };
+
+        var gameInstance = UnityLoader.instantiate("gameContainer", config, {onProgress: UnityProgress});
+
+        // Função que pode ser chamada para encerrar o Unity WebGL
+        function stopUnity() {
+            gameInstance.Quit();
+        }
+    </script>
+
+    <button onclick="stopUnity()">Parar Unity</button>
+</body>
+</html>
