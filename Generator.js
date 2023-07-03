@@ -32,7 +32,7 @@ function GenerateSchematic(canvas, json, generatorCallback) {
 }
 
 function OnGeneratorBootListener() {
-    unityInstance.SendMessage("Generator", jsonData)
+    unityInstance.SendMessage("Generator","GenerateFromJson", jsonData)
 }
 
 function OnBase64Generated(base64) {
