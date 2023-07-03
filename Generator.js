@@ -2,7 +2,7 @@ var unityInstance = null;
 var jsonData = "";
 var callback = null
 
-function GenerateSchematic(canvas, json, generatorCallback) {
+function GenerateSchematic(json, generatorCallback) {
     var buildUrl = "Build";
     var loaderUrl = buildUrl + "/UnityModule.loader.js";
     var config = {
@@ -14,6 +14,13 @@ function GenerateSchematic(canvas, json, generatorCallback) {
         productName: "Schematics",
         productVersion: "1.0",
     };
+
+    var canvas = document.createElement('canvas');
+    canvas.id = "unity-canvas";
+    canvas.className = "unity-desktop"
+    canvas.width = 32;
+    canvas.height = 32;
+    document.body.appendChild(canvas);
 
     var script = document.createElement("script");
     script.src = loaderUrl;
