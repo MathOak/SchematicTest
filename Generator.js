@@ -3,7 +3,7 @@ var callback = null;
 var iframe = null;
 
 function GenerateSchematic(json, generatorCallback) {
-    var gameUrl = "your-game.html";
+    var gameUrl = "Generator.html";
 
     iframe = document.createElement('iframe');
     iframe.id = "unity-iframe";
