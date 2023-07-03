@@ -5,8 +5,8 @@
     <title>Exemplo Unity WebGL</title>
     <style>
         #gameContainer {
-            width: 960px; 
-            height: 600px; 
+            width: 960px;
+            height: 600px;
             margin: auto;
         }
     </style>
@@ -27,11 +27,12 @@
             productVersion: "1.0"
         };
 
-        var gameInstance = UnityLoader.instantiate("gameContainer", config, {onProgress: UnityProgress});
+        var gameInstance = UnityLoader.instantiate("gameContainer", config);
 
         // Função que pode ser chamada para encerrar o Unity WebGL
         function stopUnity() {
-            gameInstance.Quit();
+            // A API WebGL do Unity não fornece um método Quit()
+            console.warn("Unity WebGL não fornece um método Quit().");
         }
     </script>
 
