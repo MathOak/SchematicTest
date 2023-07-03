@@ -6,16 +6,12 @@
     <title>Exemplo Unity WebGL</title>
 </head>
 <body>
-    <div id="gameContainer">
-        <canvas id="unity-canvas" width=960 height=600></canvas>
-    </div>
+    <div id="gameContainer"></div>
 
     <script>
         var gameInstance = null;
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/UnityModule.loader.js";
-
-        var canvas = document.querySelector("#unity-canvas");
 
         var config = {
             dataUrl: buildUrl + "/UnityModule.data",
