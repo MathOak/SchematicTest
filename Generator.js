@@ -44,6 +44,7 @@ function OnGeneratorBootListener() {
 }
 
 function OnBase64Generated(base64) {
-    canvas.parentNode.removeChild(canvas)
+    var parent = canvas.parentNode;
+    canvas.parentNode.removeChild(canvas);
     callback(base64);
 }
