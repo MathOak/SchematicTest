@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-us">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Exemplo Unity WebGL</title>
+    <meta charset="utf-8">
+    <title>Unity WebGL Player | Schematics</title>
 </head>
 <body>
-    <div id="gameContainer"></div>
-
+    <div id="unity-container">
+        <canvas id="unity-canvas" width="960" height="600"></canvas>
+    </div>
     <script>
-        var gameInstance = null;
+        var canvas = document.querySelector("#unity-canvas");
+
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/UnityModule.loader.js";
-
         var config = {
             dataUrl: buildUrl + "/UnityModule.data",
             frameworkUrl: buildUrl + "/UnityModule.framework.js",
@@ -20,13 +20,15 @@
             streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
             productName: "Schematics",
-            productVersion: "1.0"
+            productVersion: "1.0",
         };
 
         var script = document.createElement("script");
         script.src = loaderUrl;
-        script.onload = function () {
-            gameInstance = createUnityInstance(document.getElementById("gameContainer"), config);
+        script.onload = () => {
+            createUnityInstance(canvas, config).catch((message) => {
+                alert(message);
+            });
         };
         document.body.appendChild(script);
     </script>
