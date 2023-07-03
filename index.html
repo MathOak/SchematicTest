@@ -15,6 +15,7 @@
     <div id="gameContainer"></div>
 
     <script>
+        var gameInstance = null;
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/UnityModule.loader.js";
         var config = {
@@ -30,9 +31,15 @@
         var script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
-            createUnityInstance("gameContainer", config);
+            gameInstance = createUnityInstance(document.getElementById("gameContainer"), config);
         };
         document.body.appendChild(script);
+
+        // Função que pode ser chamada para encerrar o Unity WebGL
+        function stopUnity() {
+            // A API WebGL do Unity não fornece um método Quit()
+            console.warn("Unity WebGL não fornece um método Quit().");
+        }
     </script>
 
     <button onclick="stopUnity()">Parar Unity</button>
