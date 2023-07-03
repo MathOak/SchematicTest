@@ -21,14 +21,21 @@ function RunGenerator(canvas) {
         });
     };
 
+    window.addEventListener("message", function (event) {
+        if (event.data.functionName === 'OnBoot') {
+            var jsonData = event.data.data;
+            unityInstance.SendMessage("Generator", "GenerateFromJson", jsonData);
+        }
+    }, false);
+
     document.body.appendChild(script);
 }
 
-function OnGeneratorBootListener() {
-    iframe.contentWindow.unityInstance.SendMessage("Generator", "GenerateFromJson", jsonData);
+function OnGeneratorBootListener()
+{
+    window.parent.postMessage('booted', '*');
 }
 
 function OnBase64Generated(base64) {
-    document.body.removeChild(iframe);
-    callback(base64);
+    window.parent.postMessage('base64:' + base64, '*');
 }
