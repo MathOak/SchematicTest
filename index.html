@@ -8,7 +8,10 @@
     <script src="Generator.js"></script>
     <script>
         function drawImageOnScreen() {
-            GenerateSchematicImage("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (image) {
+            var inputField = document.getElementById("inputField");
+            var schematicData = inputField.value;
+
+            GenerateSchematicImage(schematicData).then(function (image) {
                 document.body.appendChild(image);
             }).catch(function (error) {
                 console.error(error);
@@ -16,7 +19,10 @@
         }
 
         function downloadImage() {
-            GenerateSchematicImage("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (image) {
+            var inputField = document.getElementById("inputField");
+            var schematicData = inputField.value;
+
+            GenerateSchematicImage(schematicData).then(function (image) {
                 var link = document.createElement('a');
                 link.href = image.src;
                 link.download = "schematic.png";
@@ -29,8 +35,9 @@
         }        
     </script>
 
+    <textarea type="text" id="inputField" style="width: 400px; height: 200px;">{&quot;drillDeph&quot;:2000.0,&quot;parts&quot;:[]}</textarea>
+
     <button onclick="drawImageOnScreen()">Desenhar Imagem</button>
     <button onclick="downloadImage()">Baixar Imagem</button>
 </body>
 </html>
-
