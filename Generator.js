@@ -8,7 +8,7 @@ function GenerateSchematic(json, generatorCallback) {
     iframe = document.createElement('iframe');
     iframe.id = "unity-iframe";
     iframe.src = gameUrl;
-    //iframe.style.display = "none"
+    iframe.style.display = "none"
 
     jsonData = json;
     callback = generatorCallback;
