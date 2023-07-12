@@ -1,8 +1,46 @@
 var iframe = null;
 var jsonData = "";
 var callback = null;
+var generating = false;
 
-function GenerateSchematic(json, generatorCallback) {
+function GenerateSchematicImage(json) {
+    return new Promise(function (resolve, reject) {
+        try {
+            console.log("Generating Schematic...");
+            RunGenerator(json, (generatorB64Callback) => {
+
+                var img = new Image();
+                img.onload = function () {
+                    console.log("Schematic Generated!");
+                    resolve(img);
+                };
+
+                img.onerror = function () {
+                    reject(new Error("Erro ao processar a imagem"));
+                };
+
+                img.src = generatorB64Callback;
+            });
+
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+function GenerateSchematicBase64(json) {
+    return new Promise(function (resolve, reject) {
+        try {
+            console.log("Generating Schematic...");
+            RunGenerator(json, (base64) => resolve(base64));
+
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+function RunGenerator(json, generatorCallback) {
     var gameUrl = "Module/iframe.html";
 
     iframe = document.createElement('iframe');
@@ -25,5 +63,6 @@ function GenerateSchematic(json, generatorCallback) {
         }
     }
 
+    console.log("Initilizing Unity Plugin...")
     document.body.appendChild(iframe);
 }

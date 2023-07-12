@@ -7,25 +7,30 @@
 <body>
     <script src="Generator.js"></script>
     <script>
-        function generateSchematic(callback) {
-            GenerateSchematic("{}", callback);
+        function drawImageOnScreen() {
+            GenerateSchematicImage("{}").then(function (image) {
+                document.body.appendChild(image);
+            }).catch(function (error) {
+                console.error(error);
+            });
         }
 
-        function drawImageOnScreen(base64) {
-            console.log("Base64 Gerado: " + base64);
-        }
+        function downloadImage() {
+            GenerateSchematicImage("{}").then(function (base64) {
+                var link = document.createElement('a');
+                link.href = base64;
+                link.download = "imagem.png";
+                link.style.display = 'none';
 
-        function downloadImage(base64) {
-            console.log("Imagem baixada: " + base64);
-        }
-
-        function writeBase64Text(base64) {
-            console.log("Base64: " + base64);
-        }
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }        
     </script>
 
-    <button onclick="generateSchematic(drawImageOnScreen)">Desenhar Imagem</button>
-    <button onclick="generateSchematic(downloadImage)">Baixar Imagem</button>
-    <button onclick="generateSchematic(writeBase64Text)">Escrever Base64</button>
+    <button onclick="drawImageOnScreen()">Desenhar Imagem</button>
+    <button onclick="downloadImage()">Baixar Imagem</button>
 </body>
 </html>
+
