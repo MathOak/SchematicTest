@@ -59,6 +59,7 @@ function RunGenerator(json, generatorCallback) {
         } else if (event.data.startsWith('base64:')) {
             var base64 = event.data.slice(7);
             document.body.removeChild(iframe);
+            console.log(base64);
             callback(base64);
         }
     }

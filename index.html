@@ -8,7 +8,7 @@
     <script src="Generator.js"></script>
     <script>
         function drawImageOnScreen() {
-            GenerateSchematicImage("{}").then(function (image) {
+            GenerateSchematicImage("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (image) {
                 document.body.appendChild(image);
             }).catch(function (error) {
                 console.error(error);
@@ -16,7 +16,7 @@
         }
 
         function downloadImage() {
-            GenerateSchematicImage("{}").then(function (base64) {
+            GenerateSchematicImage("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (base64) {
                 var link = document.createElement('a');
                 link.href = base64;
                 link.download = "imagem.png";
