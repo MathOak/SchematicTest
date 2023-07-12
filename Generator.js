@@ -58,10 +58,10 @@ function RunGenerator(json, generatorCallback) {
             iframe.contentWindow.postMessage({ functionName: "OnBoot", data: jsonData }, '*');
         } else if (event.data.startsWith('base64:')) {
             var base64 = event.data.slice(7);
-            console.log(base64);
             callback(base64);
         } else if (event.data === 'quit')
         {
+            console.log("Closing Unity Plugin.")
             document.body.removeChild(iframe);
         }
     }
