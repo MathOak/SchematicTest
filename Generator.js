@@ -6,12 +6,10 @@ var generating = false;
 function GenerateSchematicImage(json) {
     return new Promise(function (resolve, reject) {
         try {
-            console.log("Generating Schematic...");
             RunGenerator(json, (generatorB64Callback) => {
 
                 var img = new Image();
                 img.onload = function () {
-                    console.log("Schematic Generated!");
                     resolve(img);
                 };
 
@@ -31,7 +29,6 @@ function GenerateSchematicImage(json) {
 function GenerateSchematicBase64(json) {
     return new Promise(function (resolve, reject) {
         try {
-            console.log("Generating Schematic...");
             RunGenerator(json, (base64) => resolve(base64));
 
         } catch (error) {
@@ -41,6 +38,8 @@ function GenerateSchematicBase64(json) {
 }
 
 function RunGenerator(json, generatorCallback) {
+    generating = true;
+    console.log("Generating Schematic...");
     var gameUrl = "Module/iframe.html";
 
     iframe = document.createElement('iframe');
@@ -61,6 +60,7 @@ function RunGenerator(json, generatorCallback) {
             callback(base64);
         } else if (event.data === 'quit')
         {
+            generating = false;
             console.log("Closing Unity Plugin.")
             document.body.removeChild(iframe);
         }
