@@ -7,6 +7,16 @@ function GenerateSchematicImage(json) {
     return new Promise(function (resolve, reject) {
         try {
             RunGenerator(json, (generatorB64Callback) => {
+                var binaryString = window.atob(generatorB64Callback);
+                var length = binaryString.length;
+                var imageBytes = new Uint8Array(length);
+
+                for (var i = 0; i < length; i++) {
+                    imageBytes[i] = binaryString.charCodeAt(i);
+                }
+
+                var blob = new Blob([imageBytes], { type: 'image/png' });
+                var imageUrl = URL.createObjectURL(blob);
 
                 var img = new Image();
                 img.onload = function () {
@@ -17,7 +27,7 @@ function GenerateSchematicImage(json) {
                     reject(new Error("Erro ao processar a imagem"));
                 };
 
-                img.src = generatorB64Callback;
+                img.src = imageUrl;
             });
 
         } catch (error) {
