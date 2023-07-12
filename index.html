@@ -16,7 +16,7 @@
         }
 
         function downloadImage() {
-            GenerateSchematicImage("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (base64) {
+            GenerateSchematicBase64("{\"drillDeph\":2000.0,\"parts\":[]}").then(function (base64) {
                 var link = document.createElement('a');
                 link.href = base64;
                 link.download = "imagem.png";
