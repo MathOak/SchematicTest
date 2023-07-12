@@ -37,8 +37,8 @@ function OnGeneratorBootListener()
 }
 
 function OnBase64Generated(base64) {
-    console.log("Generated: " + base64);
-    window.parent.postMessage('base64:' + base64, '*');
+    result = base64;
+    window.parent.postMessage('base64:' + result, '*');
 }
 
 function OnGeneratorQuitListener()
