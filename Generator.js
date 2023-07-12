@@ -58,9 +58,11 @@ function RunGenerator(json, generatorCallback) {
             iframe.contentWindow.postMessage({ functionName: "OnBoot", data: jsonData }, '*');
         } else if (event.data.startsWith('base64:')) {
             var base64 = event.data.slice(7);
-            document.body.removeChild(iframe);
             console.log(base64);
             callback(base64);
+        } else if (event.data === 'quit')
+        {
+            document.body.removeChild(iframe);
         }
     }
 

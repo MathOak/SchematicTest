@@ -39,3 +39,8 @@ function OnGeneratorBootListener()
 function OnBase64Generated(base64) {
     window.parent.postMessage('base64:' + base64, '*');
 }
+
+function OnGeneratorQuitListener()
+{
+    window.parent.postMessage('quit' + base64, '*');
+}
