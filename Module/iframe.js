@@ -1,7 +1,7 @@
 function RunGenerator(canvas) {
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/UnityModule.loader.js";
-    var config = {
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/UnityModule.loader.js";
+    const config = {
         dataUrl: buildUrl + "/UnityModule.data",
         frameworkUrl: buildUrl + "/UnityModule.framework.js",
         codeUrl: buildUrl + "/UnityModule.wasm",
@@ -11,7 +11,7 @@ function RunGenerator(canvas) {
         productVersion: "1.0",
     };
 
-    var script = document.createElement("script");
+    let script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
         createUnityInstance(canvas, config).then((instance) => {
@@ -23,7 +23,7 @@ function RunGenerator(canvas) {
 
     window.addEventListener("message", function (event) {
         if (event.data.functionName === 'OnBoot') {
-            var jsonData = event.data.data;
+            const jsonData = event.data.data;
             unityInstance.SendMessage("Generator", "GenerateFromJson", jsonData);
         }
     }, false);
@@ -31,8 +31,7 @@ function RunGenerator(canvas) {
     document.body.appendChild(script);
 }
 
-function OnGeneratorBootListener()
-{
+function OnGeneratorBootListener() {
     window.parent.postMessage('booted', '*');
 }
 
@@ -41,7 +40,6 @@ function OnBase64Generated(base64) {
     window.parent.postMessage('base64:' + result, '*');
 }
 
-function OnGeneratorQuitListener()
-{
+function OnGeneratorQuitListener() {
     window.parent.postMessage('quit', '*');
 }
